@@ -1,32 +1,53 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 
 import './Login.css';
 
-export default function Login() {
+ function Login(props) {
+
   const [userName, setuserName] = useState('');
   const [password, setpassword] = useState('');
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
   
     const user = {
     userName: userName,
     password: password
     };
-    
-    console.log(user);
 
-    axios.post(`http://localhost:5000/user/login`, user )
+    await axios.post(`http://localhost:5000/user/login`, user )
       .then(res => {
         console.log(res);
         console.log(res.data);
-        localStorage.setItem('token', JSON.stringify(res.data))
+        localStorage.setItem('token', JSON.stringify(res.data.token))
       })
       .catch(err => {
         console.log(err)
       })
+    
+    if (localStorage.getItem('token'))
+    var token = "HKNee " + localStorage.getItem('token').substring(1,localStorage.getItem('token').length-1);
+    else (alert("Sai ten dang nhap hoac mat khau"))
+
+    await axios.post('http://localhost:5000/user/checkrole', {}, {
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        if (res.data.role == "customer") props.history.push('/customer');
+        else if (res.data.role == "shipper") props.history.push('/shipper');
+        else if (res.data.role == "manager") props.history.push('/manager');
+      })
+      .catch(err => {
+        console.log(err) 
+      })
+
+      localStorage.removeItem('token');
 }
 
   return (
@@ -42,10 +63,11 @@ export default function Login() {
         </div>
         
           <button className={'button mt-20'} type="submit">Login</button>
-        
+          
         </form>
         <h2 className="footing">HuuKhiemNee 2020</h2>
       </div>
     </div>
   );
 }
+export default withRouter(Login)
