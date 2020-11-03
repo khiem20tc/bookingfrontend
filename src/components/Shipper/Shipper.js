@@ -13,6 +13,20 @@ function Shipper(props) {
   if (localStorage.getItem('token'))
   var token = "HKNee " + localStorage.getItem('token').substring(1,localStorage.getItem('token').length-1);
 
+  const getInfoOrder = async event => {
+    event.preventDefault();
+
+    await axios.get(`http://localhost:5000/order/${ID}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      document.getElementById("order_").innerHTML = JSON.stringify(res.data);
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
  const SetState = async event => {
    event.preventDefault();
 
@@ -28,6 +42,7 @@ function Shipper(props) {
   .then(res => {
     console.log(res);
     console.log(res.data);
+    alert("Xác nhận trạng thái thành công");
   })
   .catch(err => {
     console.log(err)
@@ -52,6 +67,7 @@ function Shipper(props) {
   .then(res => {
     console.log(res);
     console.log(res.data);
+    alert("Report đã được ghi nhận lên hệ thống");
   })
   .catch(err => {
     console.log(err)
@@ -64,6 +80,10 @@ function Shipper(props) {
     <div>
           <input placeholder="ID" type="text" onChange={(event) => setID(event.target.value)}/>
     </div>
+    <p id="order_"></p>
+    <form onSubmit={getInfoOrder}>
+      <button type="submit">GetInfoOrder</button>
+    </form>
     <div>
           <input placeholder="State" type="text" onChange={(event) => setState(event.target.value)}/>
     </div>

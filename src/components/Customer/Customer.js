@@ -19,6 +19,7 @@ function Customer(props) {
       "Value": "500"
     }
 
+  var ID;
   await axios.post(`http://localhost:5000/order/create`, order, {
     headers: {
       'Authorization': `${token}`
@@ -29,11 +30,39 @@ function Customer(props) {
     console.log(res.data);
     console.log(res.data.ID);
     localStorage.setItem('ID_order', JSON.stringify(res.data.ID))
+    ID = res.data.ID;
+    alert("Tạo đơn hàng thành công");
   })
   .catch(err => {
     console.log(err)
   })
 
+  await axios.get(`http://localhost:5000/order/${ID}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      document.getElementById("order_").innerHTML = JSON.stringify(res.data);
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  const getInfoOrder = async event => {
+    event.preventDefault();
+
+    if(localStorage.getItem('ID_order'))
+    var ID = localStorage.getItem('ID_order');
+
+    await axios.get(`http://localhost:5000/order/${ID}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      document.getElementById("order_").innerHTML = JSON.stringify(res.data);
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   const Cancel = async event => {
@@ -50,6 +79,7 @@ function Customer(props) {
   .then(res => {
     console.log(res);
     console.log(res.data);
+    alert("Đã hủy đơn hàng thành công");
   })
   .catch(err => {
     console.log(err)
@@ -74,6 +104,7 @@ function Customer(props) {
   .then(res => {
     console.log(res);
     console.log(res.data);
+    alert("Report đã được ghi nhận lên hệ thống");
   })
   .catch(err => {
     console.log(err)
@@ -83,8 +114,12 @@ function Customer(props) {
   return (
     <div>
     <p>This is customer page</p>
+    <p id="order_"></p>
     <form onSubmit={Booking}>
       <button type="submit">Booking</button>
+    </form>
+    <form onSubmit={getInfoOrder}>
+      <button type="submit">GetInfoOrder</button>
     </form>
     <form onSubmit={Cancel}>
       <button type="submit">Cancel</button>

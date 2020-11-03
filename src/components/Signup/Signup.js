@@ -18,14 +18,22 @@ function Signup(props) {
             role: role
         };
 
+        var isSucessful = false;
         await axios.post(`http://localhost:5000/user/signup`, user )
             .then(res => {
                 console.log(res);
                 console.log(res.data);
+                console.log(res.status);
+                if(res.status == 200) isSucessful = true;
             })
             .catch(err => {
                 console.log(err)
             })
+
+          if(isSucessful){ 
+            alert("Đăng ký thành công");
+            props.history.push('/');}
+          else alert("Tên đăng ký đã tồn tại");
     }
 
   return (
