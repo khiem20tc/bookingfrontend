@@ -7,6 +7,7 @@ import './Customer.css';
 function Customer(props) {
 
   const [report, setReport] = useState('');
+  const[order,setOrder] = useState({});
 
   if (localStorage.getItem('token'))
   var token = "HKNee " + localStorage.getItem('token').substring(1,localStorage.getItem('token').length-1);
@@ -42,6 +43,8 @@ function Customer(props) {
       console.log(res);
       console.log(res.data);
       document.getElementById("order_").innerHTML = JSON.stringify(res.data);
+      console.log(res.data)
+      setOrder(res.data);
     })
     .catch(err => {
       console.log(err)
@@ -59,6 +62,7 @@ function Customer(props) {
       console.log(res);
       console.log(res.data);
       document.getElementById("order_").innerHTML = JSON.stringify(res.data);
+      setOrder(res.data);
     })
     .catch(err => {
       console.log(err)
@@ -130,6 +134,18 @@ function Customer(props) {
     <form onSubmit={Report}>
       <button type="submit">Report</button>
     </form>
+    <ul>
+        <div>
+          <li>ID: {order.ID}</li>
+          <li>Customer: {order.Customer}</li>
+          <li>Shipper: {order.Shipper}</li>
+          <li>Value: {order.Value}</li>
+          <li>State: {order.State}</li>
+          <li>ReportByCustomer: {order.ReportByCustomer}</li>
+          <li>ReportByShipper: {order.ReportByShipper}</li>
+          <br></br>
+        </div>
+    </ul>
     </div>
   );
 }

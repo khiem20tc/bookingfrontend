@@ -1,28 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 
 import './Manager.css';
 
 function Manager() {
-
   const[userID,setuserID] = useState('');
-  const[history,setHistory_] = useState('');
-  const[address, setAddress] = useState('');
+  const[history_,setHistory_] = useState('');
+  //const[address, setAddress] = useState('');
+  const[user,setUser] = useState();
+  const[order,setOrder] = useState();
+  const address_ = useRef('');
+
+  //console.log(address_.current)
+  var address = address_.current.value;
 
   if (localStorage.getItem('token'))
   var token = "HKNee " + localStorage.getItem('token').substring(1,localStorage.getItem('token').length-1);
 
+  //var order, user;
+
   const getOrderList = async event => {
     event.preventDefault();
 
-    var list = document.getElementById("listOrder");
+    //var list = document.getElementById("listOrder");
 
     await axios.get(`http://localhost:5000/order/`)
     .then(res => {
       console.log(res);
       console.log(res.data);
-      list.innerHTML = JSON.stringify(res.data);
+      //list.innerHTML = JSON.stringify(res.data);   
+      setOrder(res.data);
     })
     .catch(err => {
       console.log(err)
@@ -32,13 +40,15 @@ function Manager() {
   const getUserList = async event => {
     event.preventDefault();
 
-    var list = document.getElementById("listUser");
-
+    //var list = document.getElementById("listUser");
+    
     await axios.get(`http://localhost:5000/user/`)
     .then(res => {
       console.log(res);
       console.log(res.data);
-      list.innerHTML = JSON.stringify(res.data);
+      //list.innerHTML = JSON.stringify(res.data);
+      setUser(res.data);
+      console.log(user);
     })
     .catch(err => {
       console.log(err)
@@ -62,14 +72,14 @@ function Manager() {
     })
   }
 
-  const history_ = {
-    history: history
+  const history__ = {
+    history: history_
   }
 
   const setHistory = async event => {
     event.preventDefault();
 
-    await axios.put(`http://localhost:5000/user/setHistory/${address}`, history_, {
+    await axios.put(`http://localhost:5000/user/setHistory/${address}`, history__, {
       headers: {
         'Authorization': `${token}`
       }
@@ -89,11 +99,11 @@ function Manager() {
     <form onSubmit={getOrderList}>
       <button type="submit">GetOrderList</button>
     </form>
-    <p id="listOrder"></p>
+    {/* <p id="listOrder"></p> */}
     <form onSubmit={getUserList}>
       <button type="submit">GetUserList</button>
     </form>
-    <p id="listUser"></p>
+    {/* <p id="listUser"></p> */}
     <div>
           <input placeholder="userID" type="text" onChange={(event) => setuserID(event.target.value)}/>
     </div>
@@ -101,7 +111,7 @@ function Manager() {
       <button type="submit">DeleteUser</button>
     </form>
     <div>
-          <input placeholder="Address" type="text" onChange={(event) => setAddress(event.target.value)}/>
+          <input placeholder="Address" ref={address_} type="text"/>
     </div>
     <div>
           <input placeholder="setHistory" type="text" onChange={(event) => setHistory_(event.target.value)}/>
@@ -109,6 +119,37 @@ function Manager() {
     <form onSubmit={setHistory}>
       <button type="submit">setHistory</button>
     </form>
+    <ul>
+    {order &&
+    order.map( (item, index) => {
+      return(
+        <div>
+          <li key={index}>ID: {item.ID}</li>
+          <li key={index}>Customer: {item.Customer}</li>
+          <li key={index}>Shipper: {item.Shipper}</li>
+          <li key={index}>Value: {item.Value}</li>
+          <li key={index}>State: {item.State}</li>
+          <li key={index}>ReportByCustomer: {item.ReportByCustomer}</li>
+          <li key={index}>ReportByShipper: {item.ReportByShipper}</li>
+          <br></br>
+        </div>
+      )
+    })}
+    </ul>
+    <ul>
+    {user &&
+    user.map( (item, index) => {
+      return(
+        <div>
+          <li key={index}>userName: {item.userName}</li>
+          <li key={index}>Role: {item.role}</li>
+          <li key={index}>Address: {item.address}</li>
+          <li key={index}>History: {item.history}</li>
+          <br></br>
+        </div>
+      )
+    })}
+    </ul>
     </div>
   );
 }
