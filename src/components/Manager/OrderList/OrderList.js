@@ -24,9 +24,15 @@ function OrderList(props) {
         })
       }
 
+      const logout = async event => {
+        event.preventDefault();
+        localStorage.clear();
+        window.location.href = '/';
+      }
 
     return(
         <div>
+          <p>Welcome {localStorage.getItem('userName')} to manager page</p>
             <form onSubmit={getOrderList}>
       <button type="submit">GetOrderList</button>
     </form>
@@ -47,6 +53,10 @@ function OrderList(props) {
       )
     })}
     </ul>
+    <div>
+    <a href="#" onClick={logout}>LOGOUT</a>
+    </div>
+    
         </div>
     );
 }

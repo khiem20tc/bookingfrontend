@@ -41,7 +41,6 @@ function Shipper(props) {
     .then(res => {
       console.log(res);
       console.log(res.data);
-      document.getElementById("order_").innerHTML = JSON.stringify(res.data);
       setOrder_(res.data);
     })
     .catch(err => {
@@ -51,6 +50,9 @@ function Shipper(props) {
 
  const SetState = async event => {
    event.preventDefault();
+
+   if(localStorage.getItem('ID_order'))
+   var ID = localStorage.getItem('ID_order');
 
    const State = {
      State: state
@@ -74,8 +76,8 @@ function Shipper(props) {
   const Report = async event => {
     event.preventDefault();
     
-    // if(localStorage.getItem('ID_order'))
-    // var ID = localStorage.getItem('ID_order');
+    if(localStorage.getItem('ID_order'))
+    var ID = localStorage.getItem('ID_order');
 
     const report_ = {
       Report: report
@@ -102,16 +104,45 @@ function Shipper(props) {
     window.location.href = '/';
   }
 
+  const OrderProcessed = async event => {
+    event.preventDefault();
+    props.history.push('/shipper/OrderProcessed')
+  }
+
+  const HomeShipper = async event => {
+    event.preventDefault();
+    props.history.push('/shipper')
+  }
+
   return (
     <div>
     <p>Welcome {localStorage.getItem('userName')} to shipper page</p>
-    <p id="order_"></p>
+        <form onSubmit={HomeShipper}>
+      <button type="submit">HomeShipper</button>
+    </form>
+    <form onSubmit={OrderProcessed}>
+      <button type="submit">OrderProcessed</button>
+    </form>   
+        <br></br>
     <form onSubmit={getInfoOrder}>
       <button type="submit">GetInfoOrder</button>
     </form>
-    <div>
+    {/* <div>
           <input placeholder="State" type="text" onChange={(event) => setState(event.target.value)}/>
-    </div>
+    </div> */}
+    <div className="state">
+        <label>SetState:</label>
+        <div onChange={(event) => setState(event.target.value)}>
+        <input type="radio" value="Im going" name="state"/>
+        <label  className="joinInput mt-20">Im going</label>
+        <input type="radio" value="Im coming" name="state"/>
+        <label className="joinInput mt-20">Im coming</label>
+        <input type="radio" value="I diliveried" name="state"/>
+        <label className="joinInput mt-20">I diliveried</label>
+        <input type="radio" value="Cancel" name="state"/>
+        <label className="joinInput mt-20">Cancel</label>
+        </div>
+        </div>
     <form onSubmit={SetState}>
       <button type="submit">SetState</button>
     </form>

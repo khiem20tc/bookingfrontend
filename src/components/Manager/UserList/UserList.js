@@ -65,8 +65,15 @@ function UserList(props) {
     })
   }
 
+  const logout = async event => {
+    event.preventDefault();
+    localStorage.clear();
+    window.location.href = '/';
+  }
+
     return(
         <div>
+          <p>Welcome {localStorage.getItem('userName')} to manager page</p>
             <form onSubmit={getUserList}>
       <button type="submit">GetUserList</button>
     </form>
@@ -97,6 +104,9 @@ function UserList(props) {
       )
     })}
     </ul>
+    <div>
+    <a href="#" onClick={logout}>LOGOUT</a>
+    </div>
         </div>
     );
 }

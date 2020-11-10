@@ -9,6 +9,7 @@ import CustomerOrderProcessing from './components/Customer/OrderProcessing/Order
 import CustomerOrderProcessed from './components/Customer/OrderProcessed/OrderProcessed';
 import ManagerUserList from './components/Manager/UserList/UserList';
 import ManagerOrderList from './components/Manager/OrderList/OrderList';
+import ShipperOrderProcessed from './components/Shipper/OrderProcessed/OrderProcessed';
 
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
@@ -26,6 +27,7 @@ const App = () => {
       {token ? <Route exact path="/customer/OrderProcessing" component={CustomerOrderProcessing} /> : < Redirect to="/" />}
       {token ? <Route exact path="/customer/OrderProcessed" component={CustomerOrderProcessed} /> : < Redirect to="/" />}
       {token ? <Route exact path="/shipper" component={Shipper} /> : < Redirect to="/" />}
+      {token ? <Route exact path="/shipper/OrderProcessed" component={ShipperOrderProcessed} /> : < Redirect to="/" />}
     </Router>
   );
 }
