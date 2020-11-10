@@ -29,10 +29,6 @@ function Login(props) {
       .catch(err => {
         console.log(err)
       })
-    
-    // if (localStorage.getItem('token'))
-    // var token = "HKNee " + localStorage.getItem('token').substring(1,localStorage.getItem('token').length-1);
-    // else (alert("Sai ten dang nhap hoac mat khau"))
 
     await axios.post('http://localhost:5000/user/checkrole', {}, {
       headers: {

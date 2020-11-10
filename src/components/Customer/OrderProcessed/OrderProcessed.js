@@ -14,9 +14,6 @@ function OrderProcessed(props) {
     const getInfoOrder = async event => {
         event.preventDefault();
     
-        // if(localStorage.getItem('ID_order'))
-        // var ID = localStorage.getItem('ID_order');
-    
         await axios.get(`http://localhost:5000/order/orderListByUser`, {
           headers: {
             'Authorization': `${token}`

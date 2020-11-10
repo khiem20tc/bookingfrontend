@@ -8,13 +8,6 @@ function UserList(props) {
 
     const[user,setUser] = useState();
     const[history,setHistory_] = useState();
-    // const userID_ = useRef('');
-    // const address_ = useRef('');
-    //const history_ = useRef('');
-
-  // var address = address_.current.value;
-  // var userID = userID_.current.value;
-  //var history = history_.current.value;
 
   if (localStorage.getItem('token'))
   var token = "HKNee " + localStorage.getItem('token').substring(1,localStorage.getItem('token').length-1);
@@ -77,21 +70,6 @@ function UserList(props) {
             <form onSubmit={getUserList}>
       <button type="submit">GetUserList</button>
     </form>
-    {/* <div>
-          <input placeholder="userID" ref={userID_} type="text"/>
-    </div>
-    <form onSubmit={deleteUser}>
-      <button type="submit">DeleteUser</button>
-    </form>
-    <div>
-          <input placeholder="Address" ref={address_} type="text"/>
-    </div>
-    <div>
-          <input placeholder="setHistory" ref={history_} type="text"/>
-    </div>
-    <form onSubmit={setHistory}>
-      <button type="submit">setHistory</button>
-    </form> */}
     <ul>
     {user &&
     user.map( (item, index) => {

@@ -36,9 +36,6 @@ function OrderProcessing(props) {
     const getInfoOrder = async event => {
         event.preventDefault();
     
-        // if(localStorage.getItem('ID_order'))
-        // var ID = localStorage.getItem('ID_order');
-    
         await axios.get(`http://localhost:5000/order/requestIDbyCustomer`, {
           headers: {
             'Authorization': `${token}`
@@ -56,9 +53,6 @@ function OrderProcessing(props) {
 
       const Cancel = async (event,ID) => {
         event.preventDefault();
-    
-        // if(localStorage.getItem('ID_order'))
-        // var ID = localStorage.getItem('ID_order');
     
         await axios.put(`http://localhost:5000/order/${ID}/cancel`, {}, {
           headers: {
@@ -78,9 +72,6 @@ function OrderProcessing(props) {
       const Report = async (event,ID) => {
         event.preventDefault();
         
-        // if(localStorage.getItem('ID_order'))
-        // var ID = localStorage.getItem('ID_order');
-    
         const report_ = {
           Report: report
         }
