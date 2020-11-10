@@ -42,9 +42,10 @@ function Login(props) {
       .then(res => {
         console.log(res);
         console.log(res.data);
-        if (res.data.role == "customer") props.history.push('/customer');
-        else if (res.data.role == "shipper") props.history.push('/shipper');
-        else if (res.data.role == "manager") props.history.push('/manager');
+        localStorage.setItem('role', res.data.role)
+          if (res.data.role == "customer") props.history.push('/customer');
+          else if (res.data.role == "shipper") props.history.push('/shipper');
+          else if (res.data.role == "manager") props.history.push('/manager');
       })
       .catch(err => {
         console.log(err) 

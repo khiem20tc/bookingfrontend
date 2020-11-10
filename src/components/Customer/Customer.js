@@ -17,7 +17,6 @@ function Customer(props) {
     event.preventDefault();
     
     const order = {
-      "Shipper": "1a1941cb83beb06352357780cd6b2a62f4518ccf680eebc9b934bfbca29c1c6c",
       "Value": "500"
     }
 
@@ -43,7 +42,7 @@ function Customer(props) {
     .then(res => {
       console.log(res);
       console.log(res.data);
-      document.getElementById("order_").innerHTML = JSON.stringify(res.data);
+      //document.getElementById("order_").innerHTML = JSON.stringify(res.data);
       console.log(res.data)
       setOrder_(res.data);
     })
@@ -52,53 +51,51 @@ function Customer(props) {
     })
   }
 
-  
+  // const Cancel = async event => {
+  //   event.preventDefault();
 
-  const Cancel = async event => {
-    event.preventDefault();
+  //   if(localStorage.getItem('ID_order'))
+  //   var ID = localStorage.getItem('ID_order');
 
-    if(localStorage.getItem('ID_order'))
-    var ID = localStorage.getItem('ID_order');
+  //   await axios.put(`http://localhost:5000/order/${ID}/cancel`, {}, {
+  //     headers: {
+  //       'Authorization': `${token}`
+  //     }
+  //   })
+  // .then(res => {
+  //   console.log(res);
+  //   console.log(res.data);
+  //   alert("Đã hủy đơn hàng thành công");
+  // })
+  // .catch(err => {
+  //   console.log(err)
+  // })
+  // }
 
-    await axios.put(`http://localhost:5000/order/${ID}/cancel`, {}, {
-      headers: {
-        'Authorization': `${token}`
-      }
-    })
-  .then(res => {
-    console.log(res);
-    console.log(res.data);
-    alert("Đã hủy đơn hàng thành công");
-  })
-  .catch(err => {
-    console.log(err)
-  })
-  }
-
-  const Report = async event => {
-    event.preventDefault();
+  // const Report = async event => {
+  //   event.preventDefault();
     
-    if(localStorage.getItem('ID_order'))
-    var ID = localStorage.getItem('ID_order');
+  //   if(localStorage.getItem('ID_order'))
+  //   var ID = localStorage.getItem('ID_order');
 
-    const report_ = {
-      Report: report
-    }
+  //   const report_ = {
+  //     Report: report
+  //   }
 
-    await axios.put(`http://localhost:5000/order/${ID}/report`, report_, {
-      headers: {
-        'Authorization': `${token}`
-      }
-    })
-  .then(res => {
-    console.log(res);
-    console.log(res.data);
-    alert("Report đã được ghi nhận lên hệ thống");
-  })
-  .catch(err => {
-    console.log(err)
-  })
-  }
+  //   await axios.put(`http://localhost:5000/order/${ID}/report`, report_, {
+  //     headers: {
+  //       'Authorization': `${token}`
+  //     }
+  //   })
+  // .then(res => {
+  //   console.log(res);
+  //   console.log(res.data);
+  //   alert("Report đã được ghi nhận lên hệ thống");
+  // })
+  // .catch(err => {
+  //   console.log(err)
+  // })
+  // }
 
   const logout = async event => {
     event.preventDefault();
@@ -106,9 +103,14 @@ function Customer(props) {
     window.location.href = '/';
   }
 
-  const Manipulation = async event => {
+  const OrderProcessing = async event => {
     event.preventDefault();
-    props.history.push('/customer/Manipulation')
+    props.history.push('/customer/OrderProcessing')
+  }
+
+  const OrderProcessed = async event => {
+    event.preventDefault();
+    props.history.push('/customer/OrderProcessed')
   }
 
   const HomeCustomer = async event => {
@@ -122,14 +124,18 @@ function Customer(props) {
     <form onSubmit={HomeCustomer}>
       <button type="submit">HomeCustomer</button>
     </form>
-    <form onSubmit={Manipulation}>
-      <button type="submit">Manipulation</button>
+    <form onSubmit={OrderProcessing}>
+      <button type="submit">OrderProcessing</button>
     </form>
+    <form onSubmit={OrderProcessed}>
+      <button type="submit">OrderProcessed</button>
+    </form>
+    <br></br>
     <p id="order_"></p>
     <form onSubmit={Booking}>
       <button type="submit">Booking</button>
     </form>
-    <form onSubmit={Cancel}>
+    {/* <form onSubmit={Cancel}>
         <button type="submit">Cancel</button>
         </form>
         <div>
@@ -137,7 +143,7 @@ function Customer(props) {
         </div>
         <form onSubmit={Report}>
         <button type="submit">Report</button>
-        </form>
+        </form> */}
     <ul>
         <div>
           <li>ID: {order_.ID}</li>

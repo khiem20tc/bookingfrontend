@@ -7,13 +7,14 @@ import './UserList.css';
 function UserList(props) {
 
     const[user,setUser] = useState();
-    const userID_ = useRef('');
-    const address_ = useRef('');
-    const history_ = useRef('');
+    const[history,setHistory_] = useState();
+    // const userID_ = useRef('');
+    // const address_ = useRef('');
+    //const history_ = useRef('');
 
-  var address = address_.current.value;
-  var userID = userID_.current.value;
-  var history = history_.current.value;
+  // var address = address_.current.value;
+  // var userID = userID_.current.value;
+  //var history = history_.current.value;
 
   if (localStorage.getItem('token'))
   var token = "HKNee " + localStorage.getItem('token').substring(1,localStorage.getItem('token').length-1);
@@ -33,10 +34,10 @@ function UserList(props) {
     })
   }
 
-  const deleteUser = async event => {
+  const deleteUser = async (event,ID) => {
     event.preventDefault();
 
-    await axios.delete(`http://localhost:5000/user/${userID}`, {
+    await axios.delete(`http://localhost:5000/user/${ID}`, {
       headers: {
         'Authorization': `${token}`
       }
@@ -54,7 +55,7 @@ function UserList(props) {
     history: history
   }
 
-  const setHistory = async event => {
+  const setHistory = async (event,address) => {
     event.preventDefault();
 
     await axios.put(`http://localhost:5000/user/setHistory/${address}`, history__, {
@@ -76,7 +77,7 @@ function UserList(props) {
             <form onSubmit={getUserList}>
       <button type="submit">GetUserList</button>
     </form>
-    <div>
+    {/* <div>
           <input placeholder="userID" ref={userID_} type="text"/>
     </div>
     <form onSubmit={deleteUser}>
@@ -90,7 +91,7 @@ function UserList(props) {
     </div>
     <form onSubmit={setHistory}>
       <button type="submit">setHistory</button>
-    </form>
+    </form> */}
     <ul>
     {user &&
     user.map( (item, index) => {
@@ -100,6 +101,19 @@ function UserList(props) {
           <li key={index}>Role: {item.role}</li>
           <li key={index}>Address: {item.address}</li>
           <li key={index}>History: {item.history}</li>
+          <li key={index}>DeleteUser:
+          <form onSubmit={event => {deleteUser(event, item._id)}}>
+          <button type="submit">DeleteUser</button>
+          </form>
+          </li>
+          <li key={index}>SetHistory:
+          <div>
+          <input placeholder="setHistory" type="text" onChange={(event) => setHistory_(event.target.value)}/>
+          </div>
+          <form onSubmit={event => {setHistory(event, item.address)}}>
+          <button type="submit">SetHistory</button>
+          </form>
+          </li>
           <br></br>
         </div>
       )
