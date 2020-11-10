@@ -67,6 +67,11 @@ body {
   margin-top: 20px;
 }
 
+.role {
+  font-size: 20px;
+  color: white;
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
   .joinOuterContainer {
     height: 100%;

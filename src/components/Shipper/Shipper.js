@@ -7,20 +7,42 @@ import './Shipper.css';
 function Shipper(props) {
 
   const [report, setReport] = useState('');
-  const [ID, setID] = useState('');
+  //const [ID, setID] = useState('');
   const [state, setState] = useState('');
+  const [order_,setOrder_] = useState('');
 
   if (localStorage.getItem('token'))
   var token = "HKNee " + localStorage.getItem('token').substring(1,localStorage.getItem('token').length-1);
 
+  var ID = '';
+  if(localStorage.getItem('ID_order'))
+  ID = localStorage.getItem('ID_order');
+
   const getInfoOrder = async event => {
     event.preventDefault();
+
+    await axios.get(`http://localhost:5000/order/requestIDbyShipper`, {
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      localStorage.setItem('ID_order', res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+    ID = localStorage.getItem('ID_order');
 
     await axios.get(`http://localhost:5000/order/${ID}`)
     .then(res => {
       console.log(res);
       console.log(res.data);
       document.getElementById("order_").innerHTML = JSON.stringify(res.data);
+      setOrder_(res.data);
     })
     .catch(err => {
       console.log(err)
@@ -74,12 +96,15 @@ function Shipper(props) {
   })
   }
 
+  const logout = async event => {
+    event.preventDefault();
+    localStorage.clear();
+    window.location.href = '/';
+  }
+
   return (
     <div>
-    <p>This is shipper page</p>
-    <div>
-          <input placeholder="ID" type="text" onChange={(event) => setID(event.target.value)}/>
-    </div>
+    <p>Welcome {localStorage.getItem('userName')} to shipper page</p>
     <p id="order_"></p>
     <form onSubmit={getInfoOrder}>
       <button type="submit">GetInfoOrder</button>
@@ -96,6 +121,21 @@ function Shipper(props) {
     <form onSubmit={Report}>
       <button type="submit">Report</button>
     </form>
+    <ul>
+        <div>
+          <li>ID: {order_.ID}</li>
+          <li>Customer: {order_.Customer}</li>
+          <li>Shipper: {order_.Shipper}</li>
+          <li>Value: {order_.Value}</li>
+          <li>State: {order_.State}</li>
+          <li>ReportByCustomer: {order_.ReportByCustomer}</li>
+          <li>ReportByShipper: {order_.ReportByShipper}</li>
+          <br></br>
+        </div>
+    </ul>
+    <div>
+    <a href="#" onClick={logout}>LOGOUT</a>
+    </div>
     </div>
   );
 }

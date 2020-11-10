@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 
@@ -47,10 +47,18 @@ function Signup(props) {
         <div>
           <input placeholder="Password" className="joinInput mt-20" type="password" onChange={(event) => setpassword(event.target.value)}/>
         </div>
-        <div>
-          <input placeholder="Role: Please input customer/shipper" className="joinInput mt-20" type="text" onChange={(event) => setRole(event.target.value)}/>
+        <div className="role">
+        <label>Roles:</label>
+        <div onChange={(event) => setRole(event.target.value)}>
+        <input type="radio" value="customer" name="role"/>
+        <label  className="joinInput mt-20">Customer</label>
+        <input type="radio" value="shipper" name="role"/>
+        <label className="joinInput mt-20">Shipper</label>
+        <input type="radio" value="manager" name="role"/>
+        <label className="joinInput mt-20">Manager</label>
         </div>
-          <button className={'button mt-20'} type="submit">Sign Up</button>
+        </div>
+        <button className={'button mt-20'} type="submit">Sign Up</button>
         </form>
         <h2 className="footing">HuuKhiemNee 2020</h2>
       </div>

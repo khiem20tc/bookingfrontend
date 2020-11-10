@@ -23,6 +23,7 @@ function Login(props) {
         console.log(res);
         console.log(res.data);
         localStorage.setItem('token', JSON.stringify(res.data.token))
+        localStorage.setItem('userName', user.userName)
         token = "HKNee " + res.data.token;
       })
       .catch(err => {
