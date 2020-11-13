@@ -71,6 +71,17 @@ function Shipper(props) {
   .catch(err => {
     console.log(err)
   })
+
+  await axios.get(`http://localhost:5000/order/${ID}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      setOrder_(res.data);
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
  }
 
   const Report = async event => {
@@ -96,6 +107,17 @@ function Shipper(props) {
   .catch(err => {
     console.log(err)
   })
+
+  await axios.get(`http://localhost:5000/order/${ID}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      setOrder_(res.data);
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
   }
 
   const logout = async event => {

@@ -67,6 +67,21 @@ function OrderProcessing(props) {
       .catch(err => {
         console.log(err)
       })
+
+      await axios.get(`http://localhost:5000/order/requestIDbyCustomer`, {
+        headers: {
+          'Authorization': `${token}`
+        }
+      })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        setOrder(res.data);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
       }
 
       const Report = async (event,ID) => {
@@ -89,6 +104,21 @@ function OrderProcessing(props) {
       .catch(err => {
         console.log(err)
       })
+
+      await axios.get(`http://localhost:5000/order/requestIDbyCustomer`, {
+          headers: {
+            'Authorization': `${token}`
+          }
+        })
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+          setOrder(res.data);
+        })
+        .catch(err => {
+          console.log(err)
+        })
+
       }
 
     return (
@@ -141,7 +171,7 @@ function OrderProcessing(props) {
           <td key={index}>{item.Shipper}</td>
           <td key={index}>{item.Value}</td>
           <td key={index}>{item.State}</td>
-          <td key={index}>{item.ReportByCustsomer}</td>
+          <td key={index}>{item.ReportByCustomer}</td>
           <td key={index}>{item.ReportByShipper}</td>
           <td key={index}>
           <form onSubmit={event => Cancel(event, item.ID)}>

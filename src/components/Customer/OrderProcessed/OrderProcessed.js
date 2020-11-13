@@ -100,7 +100,7 @@ function OrderProcessed(props) {
           <td key={index}>{item.Shipper}</td>
           <td key={index}>{item.Value}</td>
           <td key={index}>{item.State}</td>
-          <td key={index}>{item.ReportByCustsomer}</td>
+          <td key={index}>{item.ReportByCustomer}</td>
           <td key={index}>{item.ReportByShipper}</td>
           <br></br>
           </tr>

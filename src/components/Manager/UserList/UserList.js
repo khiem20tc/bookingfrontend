@@ -42,6 +42,17 @@ function UserList(props) {
     .catch(err => {
       console.log(err)
     })
+
+    await axios.get(`http://localhost:5000/user/`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      setUser(res.data);
+      console.log(user);
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   const history__ = {
@@ -63,6 +74,17 @@ function UserList(props) {
     .catch(err => {
       console.log(err)
     })
+
+    await axios.get(`http://localhost:5000/user/`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      setUser(res.data);
+      console.log(user);
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   const logout = async event => {
@@ -74,10 +96,54 @@ function UserList(props) {
     return(
         <div>
           <p>Welcome {localStorage.getItem('userName')} to manager page</p>
+          <div>
+    <a href="#" onClick={logout}>LOGOUT</a>
+    </div>
             <form onSubmit={getUserList}>
       <button type="submit">GetUserList</button>
     </form>
-    <ul>
+
+    <table id="orders">
+    <tr>
+    <th>UserName</th>
+    <th>Role</th>
+    <th>Address</th>
+    <th>History</th>
+    <th>Delete</th>
+    <th>SetHistory</th>
+    </tr>
+        {/* <ul> */}
+    {user &&
+    user.map((item, index) => {
+      return(
+        // <div>
+          <tr>
+          <td key={index}>{item.userName}</td>
+          <td key={index}>{item.role}</td>
+          <td key={index}>{item.address}</td>
+          <td key={index}>{item.history}</td>
+          <td key={index}>
+          <form onSubmit={event => {deleteUser(event, item._id)}}>
+          <button type="submit">DeleteUser</button>
+          </form>
+          </td>
+          <td key={index}>
+          <div>
+          <input placeholder="setHistory" type="text" onChange={(event) => setHistory_(event.target.value)}/>
+          </div>
+          <form onSubmit={event => {setHistory(event, item.address)}}>
+          <button type="submit">SetHistory</button>
+          </form>
+          </td>
+          <br></br>
+          </tr>
+        // </div>
+      )
+    })}
+        {/* </ul> */}
+        </table>
+
+    {/* <ul>
     {user &&
     user.map( (item, index) => {
       return(
@@ -103,10 +169,9 @@ function UserList(props) {
         </div>
       )
     })}
-    </ul>
-    <div>
-    <a href="#" onClick={logout}>LOGOUT</a>
-    </div>
+    </ul> */}
+
+   
         </div>
     );
 }

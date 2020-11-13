@@ -26,17 +26,21 @@ function Manager(props) {
   return (
     <div>
     <p>Welcome {localStorage.getItem('userName')} to manager page</p>
+    <div id="logout">
+    <a href="#" onClick={logout}>LOGOUT</a>
+    </div>
+    <div id="menu">
+    <ul>
     <form onSubmit={OrderList}>
       <button type="submit">OrderList</button>
     </form>
     <form onSubmit={UserList}>
       <button type="submit">UserList</button>
     </form>
-    
-    
-    <div>
-    <a href="#" onClick={logout}>LOGOUT</a>
+    </ul>
     </div>
+    <br></br>
+    
     </div>
   );
 }

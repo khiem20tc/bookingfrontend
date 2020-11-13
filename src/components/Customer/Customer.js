@@ -35,6 +35,7 @@ function Customer(props) {
     alert("Tạo đơn hàng thành công");
   })
   .catch(err => {
+    alert("Không thể tạo đơn hàng vui lòng thử lại")
     console.log(err)
   })
 
@@ -74,7 +75,7 @@ function Customer(props) {
   return (
     <div>
     <p>Welcome {localStorage.getItem('userName')} to customer page</p>
-    <div>
+    <div id="logout">
     <a href="#" onClick={logout}>LOGOUT</a>
     </div>
     <div id="menu">
