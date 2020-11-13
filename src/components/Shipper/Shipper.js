@@ -136,18 +136,41 @@ function Shipper(props) {
     <form onSubmit={getInfoOrder}>
       <button type="submit">GetInfoOrder</button>
     </form>
-    {/* <div>
-          <input placeholder="State" type="text" onChange={(event) => setState(event.target.value)}/>
-    </div> */}
-    <div className="state">
-        <label>SetState:</label>
+    <br></br>
+    <table id="orders">
+    <tr>
+    <th>ID</th>
+    <th>Customer</th>
+    <th>Shipper</th>
+    <th>Value</th>
+    <th>State</th>
+    <th>ReportByCustomer</th>
+    <th>ReportByShipper</th>
+    <th>SetState</th>
+    <th>Report</th>
+    </tr>
+    <tr>
+          <td>{order_.ID}</td>
+          <td>{order_.Customer}</td>
+          <td>{order_.Shipper}</td>
+          <td>{order_.Value}</td>
+          <td>{order_.State}</td>
+          <td>{order_.ReportByCustomer}</td>
+          <td>{order_.ReportByShipper}</td>
+          <td>
+
+          <div className="state">
+        <label></label>
         <div onChange={(event) => setState(event.target.value)}>
         <input type="radio" value="Im going" name="state"/>
         <label  className="joinInput mt-20">Im going</label>
+        <br></br>
         <input type="radio" value="Im coming" name="state"/>
         <label className="joinInput mt-20">Im coming</label>
+        <br></br>
         <input type="radio" value="I diliveried" name="state"/>
         <label className="joinInput mt-20">I diliveried</label>
+        <br></br>
         <input type="radio" value="Cancel" name="state"/>
         <label className="joinInput mt-20">Cancel</label>
         </div>
@@ -155,26 +178,21 @@ function Shipper(props) {
     <form onSubmit={SetState}>
       <button type="submit">SetState</button>
     </form>
-    <div>
+
+          </td>
+
+        <td>
+        <div>
           <input placeholder="Report" type="text" onChange={(event) => setReport(event.target.value)}/>
     </div>
     <form onSubmit={Report}>
       <button type="submit">Report</button>
     </form>
-    <ul>
-        <div>
-          <li>ID: {order_.ID}</li>
-          <li>Customer: {order_.Customer}</li>
-          <li>Shipper: {order_.Shipper}</li>
-          <li>Value: {order_.Value}</li>
-          <li>State: {order_.State}</li>
-          <li>ReportByCustomer: {order_.ReportByCustomer}</li>
-          <li>ReportByShipper: {order_.ReportByShipper}</li>
+        </td>
           <br></br>
-        </div>
-    </ul>
-    
-    </div>
+    </tr>
+    </table>
+</div>
   );
 }
 
