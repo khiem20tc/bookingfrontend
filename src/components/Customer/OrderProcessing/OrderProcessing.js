@@ -94,52 +94,75 @@ function OrderProcessing(props) {
     return (
         <div>
           <p>Welcome {localStorage.getItem('userName')} to customer page</p>
+          <div>
+    <a href="#" onClick={logout}>LOGOUT</a>
+    </div>
+          <div id="menu">
+    <ul>
         <form onSubmit={HomeCustomer}>
-      <button type="submit">HomeCustomer</button>
+          <a>
+      <button type="submit">HomeCustomer</button></a>
     </form>
     <form onSubmit={OrderProcessing}>
-      <button type="submit">OrderProcessing</button>
+      <a>
+      <button type="submit">OrderProcessing</button></a>
     </form>
     <form onSubmit={OrderProcessed}>
-      <button type="submit">OrderProcessed</button>
+    <a>
+      <button type="submit">OrderProcessed</button></a>
     </form>
+    </ul>
+    </div>
         <br></br>
         <form onSubmit={getInfoOrder}>
         <button type="submit">GetInfoOrder</button>
         </form>
-        <ul>
+        <br></br>
+        <table id="orders">
+    <tr>
+    <th>ID</th>
+    <th>Customer</th>
+    <th>Shipper</th>
+    <th>Value</th>
+    <th>State</th>
+    <th>ReportByCustomer</th>
+    <th>ReportByShipper</th>
+    <th>Cancel</th>
+    <th>Report</th>
+    </tr>
+        {/* <ul> */}
     {order &&
     order.map((item, index) => {
       return(
-        <div>
-          <li key={index}>ID: {item.ID}</li>
-          <li key={index}>Customer: {item.Customer}</li>
-          <li key={index}>Shipper: {item.Shipper}</li>
-          <li key={index}>Value: {item.Value}</li>
-          <li key={index}>State: {item.State}</li>
-          <li key={index}>ReportByCustomer: {item.ReportByCustomer}</li>
-          <li key={index}>ReportByShipper: {item.ReportByShipper}</li>
-          <li key={index}>Cancel 
+        // <div>
+          <tr>
+          <td key={index}>{item.ID}</td>
+          <td key={index}>{item.Customer}</td>
+          <td key={index}>{item.Shipper}</td>
+          <td key={index}>{item.Value}</td>
+          <td key={index}>{item.State}</td>
+          <td key={index}>{item.ReportByCustsomer}</td>
+          <td key={index}>{item.ReportByShipper}</td>
+          <td key={index}>
           <form onSubmit={event => Cancel(event, item.ID)}>
           <button type="submit">Cancel</button>
           </form>
-          </li>
-          <li key={index}>Report
+          </td>
+          <td key={index}>
           <div>
           <input placeholder="Report" type="text" onChange={(event) => setReport(event.target.value)}/>
           </div>
           <form onSubmit={event => Report(event,item.ID)}>
           <button type="submit">Report</button>
           </form>
-          </li>
+          </td>
           <br></br>
-        </div>
+          </tr>
+        // </div>
       )
     })}
-        </ul>
-        <div>
-    <a href="#" onClick={logout}>LOGOUT</a>
-    </div>
+        {/* </ul> */}
+        </table>
         </div>
     );
 }

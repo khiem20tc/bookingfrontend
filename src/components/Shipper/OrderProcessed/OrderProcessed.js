@@ -53,12 +53,21 @@ function OrderProcessed(props) {
     return(
         <div>
             <p>Welcome {localStorage.getItem('userName')} to shipper page</p>
+            <div>
+    <a href="#" onClick={logout}>LOGOUT</a>
+    </div>
+            <div id="menu">
+              <ul>
         <form onSubmit={HomeShipper}>
-      <button type="submit">HomeShipper</button>
+          <a>
+      <button type="submit">HomeShipper</button></a>
     </form>
     <form onSubmit={OrderProcessed}>
-      <button type="submit">OrderProcessed</button>
-    </form>   
+      <a>
+      <button type="submit">OrderProcessed</button></a>
+    </form>
+    </ul>   
+    </div>
         <br></br>
         <form onSubmit={getInfoOrder}>
         <button type="submit">GetInfoOrder</button>
@@ -81,10 +90,6 @@ function OrderProcessed(props) {
               })
             }
         </ul>
-        <div>
-    <a href="#" onClick={logout}>LOGOUT</a>
-    </div>
-    
         </div>
     );
 }

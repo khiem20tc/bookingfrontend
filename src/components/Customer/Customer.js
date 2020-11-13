@@ -74,35 +74,62 @@ function Customer(props) {
   return (
     <div>
     <p>Welcome {localStorage.getItem('userName')} to customer page</p>
+    <div>
+    <a href="#" onClick={logout}>LOGOUT</a>
+    </div>
+    <div id="menu">
+    <ul>
     <form onSubmit={HomeCustomer}>
-      <button type="submit">HomeCustomer</button>
+      <a>
+      <button type="submit">HomeCustomer</button></a>
     </form>
     <form onSubmit={OrderProcessing}>
-      <button type="submit">OrderProcessing</button>
+    <a>
+      <button type="submit">OrderProcessing</button></a>
     </form>
     <form onSubmit={OrderProcessed}>
-      <button type="submit">OrderProcessed</button>
+    <a>
+      <button type="submit">OrderProcessed</button></a>
     </form>
+    </ul>
+    </div>
     <br></br>
     <p id="order_"></p>
     <form onSubmit={Booking}>
       <button type="submit">Booking</button>
     </form>
-    <ul>
-        <div>
-          <li>ID: {order_.ID}</li>
-          <li>Customer: {order_.Customer}</li>
-          <li>Shipper: {order_.Shipper}</li>
-          <li>Value: {order_.Value}</li>
+    <br></br>
+    <table id="orders">
+    <tr>
+    <th>ID</th>
+    <th>Customer</th>
+    <th>Shipper</th>
+    <th>Value</th>
+    <th>State</th>
+    <th>ReportByCustomer</th>
+    <th>ReportByShipper</th>
+    </tr>
+    <tr>
+    {/* <ul>
+        <div> */}
+          <td>{order_.ID}</td>
+          <td>{order_.Customer}</td>
+          <td>{order_.Shipper}</td>
+          <td>{order_.Value}</td>
+          <td>{order_.State}</td>
+          <td>{order_.ReportByCustomer}</td>
+          <td>{order_.ReportByShipper}</td>
+          
+          
+          {/* <li>Value: {order_.Value}</li>
           <li>State: {order_.State}</li>
           <li>ReportByCustomer: {order_.ReportByCustomer}</li>
-          <li>ReportByShipper: {order_.ReportByShipper}</li>
+          <li>ReportByShipper: {order_.ReportByShipper}</li> */}
           <br></br>
-        </div>
-    </ul>
-    <div>
-    <a href="#" onClick={logout}>LOGOUT</a>
-    </div>
+        {/* </div>
+    </ul> */}
+    </tr>
+    </table>
     </div>
   );
 }

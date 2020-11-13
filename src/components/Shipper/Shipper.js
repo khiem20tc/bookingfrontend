@@ -117,13 +117,22 @@ function Shipper(props) {
   return (
     <div>
     <p>Welcome {localStorage.getItem('userName')} to shipper page</p>
-        <form onSubmit={HomeShipper}>
-      <button type="submit">HomeShipper</button>
-    </form>
+    <div>
+    <a href="#" onClick={logout}>LOGOUT</a>
+    </div>
+    <div id="menu">
+    <ul>
+       <form onSubmit={HomeShipper}>
+         <a>
+      <button type="submit">HomeShipper</button></a>
+    </form> 
     <form onSubmit={OrderProcessed}>
-      <button type="submit">OrderProcessed</button>
+      <a>
+      <button type="submit">OrderProcessed</button></a>
     </form>   
-        <br></br>
+        </ul>
+    </div>
+    <br></br>
     <form onSubmit={getInfoOrder}>
       <button type="submit">GetInfoOrder</button>
     </form>
@@ -164,9 +173,7 @@ function Shipper(props) {
           <br></br>
         </div>
     </ul>
-    <div>
-    <a href="#" onClick={logout}>LOGOUT</a>
-    </div>
+    
     </div>
   );
 }
