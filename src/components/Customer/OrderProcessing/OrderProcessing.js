@@ -50,8 +50,20 @@ function OrderProcessing(props) {
         console.log(res.data);
         setOrder(res.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          alert(JSON.stringify(error.response.data));
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
       });
   };
 
@@ -73,8 +85,20 @@ function OrderProcessing(props) {
         console.log(res.data);
         alert("Đã hủy đơn hàng thành công");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          alert(JSON.stringify(error.response.data));
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
       });
 
     await axios
@@ -88,8 +112,20 @@ function OrderProcessing(props) {
         console.log(res.data);
         setOrder(res.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          alert(JSON.stringify(error.response.data));
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
       });
   };
 

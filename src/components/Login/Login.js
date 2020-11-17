@@ -26,8 +26,20 @@ function Login(props) {
         localStorage.setItem("userName", user.userName);
         token = "HKNee " + res.data.token;
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          alert(JSON.stringify(error.response.data));
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
       });
 
     await axios
@@ -52,7 +64,7 @@ function Login(props) {
         console.log(err);
       });
 
-    if (!token) alert("Sai tên đăng nhập hoặc mật khẩu");
+    // if (!token) alert("Sai tên đăng nhập hoặc mật khẩu");
   };
 
   return (

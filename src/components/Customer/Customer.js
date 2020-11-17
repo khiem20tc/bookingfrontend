@@ -38,9 +38,20 @@ function Customer(props) {
         ID = res.data.ID;
         alert("Tạo đơn hàng thành công");
       })
-      .catch((err) => {
-        alert("Không thể tạo đơn hàng vui lòng thử lại");
-        console.log(err);
+      .catch((error) => {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          alert(JSON.stringify(error.response.data));
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
       });
 
     await axios
@@ -51,8 +62,20 @@ function Customer(props) {
         console.log(res.data);
         setOrder_(res.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          //alert(JSON.stringify(error.response.data));
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
       });
   };
 

@@ -73,8 +73,20 @@ function Shipper(props) {
         console.log(res.data);
         alert("Xác nhận trạng thái thành công");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          alert(JSON.stringify(error.response.data));
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
       });
 
     await axios
@@ -110,8 +122,20 @@ function Shipper(props) {
         console.log(res.data);
         alert("Report đã được ghi nhận lên hệ thống");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          alert(JSON.stringify(error.response.data));
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
       });
 
     await axios
@@ -194,16 +218,19 @@ function Shipper(props) {
               <label></label>
               <div onChange={(event) => setState(event.target.value)}>
                 <input type="radio" value="Im going" name="state" />
-                <label className="joinInput mt-20">Im going</label>
+                <label>Im going</label>
+                <br></br>
                 <br></br>
                 <input type="radio" value="Im coming" name="state" />
-                <label className="joinInput mt-20">Im coming</label>
+                <label>Im coming</label>
+                <br></br>
                 <br></br>
                 <input type="radio" value="I diliveried" name="state" />
-                <label className="joinInput mt-20">I diliveried</label>
+                <label>I diliveried</label>
+                <br></br>
                 <br></br>
                 <input type="radio" value="Cancel" name="state" />
-                <label className="joinInput mt-20">Cancel</label>
+                <label>Cancel</label>
               </div>
             </div>
             <form onSubmit={SetState}>

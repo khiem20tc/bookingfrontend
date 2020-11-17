@@ -33,11 +33,6 @@ function OrderProcessed(props) {
       });
   };
 
-  const OrderProcessing = async (event) => {
-    event.preventDefault();
-    props.history.push("/shipper/OrderProcessing");
-  };
-
   const OrderProcessed = async (event) => {
     event.preventDefault();
     props.history.push("/shipper/OrderProcessed");
